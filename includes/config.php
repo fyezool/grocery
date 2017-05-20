@@ -7,7 +7,7 @@ session_start();
 //database credentials for connections
 
 //db host and related port
-define('DBHOST','127.0.0.1:3307');
+define('DBHOST','127.0.0.1');
 
 //db username 
 define('DBUSER','root');
