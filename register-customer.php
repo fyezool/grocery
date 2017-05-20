@@ -18,9 +18,6 @@ if(isset($_POST['submit'])){
 
 	}
 
-
-
-
 	//if no errors have been created carry on
 	if(!isset($error)){
 
@@ -82,7 +79,7 @@ require('layout/header.php');
 				if(isset($_GET['action']) && $_GET['action'] == 'joined'){
 					echo "<h2 class='bg-success'>Registration successful, please check your email to activate your account.</h2>";
 				}
-				
+
 				?>
 
 				<div class="form-group">
