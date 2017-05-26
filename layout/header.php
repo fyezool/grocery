@@ -4,6 +4,6 @@
     <meta charset="utf-8">
     <title><?php if(isset($title)){ echo $title; }?></title>
     <link href="./bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>

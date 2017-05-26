@@ -1,4 +1,4 @@
-<?php require('includes/config.php');
+	<?php require('includes/config.php');
 
 
 //if form has been submitted process it
@@ -26,19 +26,21 @@ if(isset($_POST['submit'])){
 		try {
 
 			//insert into database with a prepared statement
-			$stmt = $db->prepare('INSERT INTO customers (cust_name,cust_address,cust_email,cust_contact) VALUES (:name, :address, :email, :contact)');
+			$stmt = $db->prepare('INSERT INTO customers (cust_name,cust_email,cust_contact,cust_city,cust_state,cust_country) VALUES (:name, :email, :contact, :city, :state, :country)');
 			$stmt->execute(array(
 				':name' => $_POST['name'],
-				':address' => $_POST['address'],
 				':email' => $_POST['email'],
 				':contact' => $_POST['contact'],
+				':city' => $_POST['city'],
+				':state' => $_POST['state'],
+				':country' => $_POST['country'],
 
 			));
 
 
 
 			//redirect to index page
-			header('Location: register.php?action=joined');
+			header('Location: view_customer.php?action=joined');
 			exit;
 
 		//else catch the exception and show the error.
@@ -77,7 +79,8 @@ require('layout/header.php');
 
 								//if action is joined show sucess
 				if(isset($_GET['action']) && $_GET['action'] == 'joined'){
-					echo "<h2 class='bg-success'>Registration successful, please check your email to activate your account.</h2>";
+					echo "<h2 class='bg-success'>Customer Registration successful.</h2>";
+					//redirecting to the display page
 				}
 
 				?>
@@ -86,13 +89,19 @@ require('layout/header.php');
 					<input type="text" name="name" id="name" class="form-control input-lg" placeholder="Costumer Name" value="<?php if(isset($error)){ echo $_POST['username']; } ?>" tabindex="1">
 				</div>
 				<div class="form-group">
-					<textarea name="address" rows="5" id="address" class="form-control input-lg" placeholder="Costumer Address" value="<?php if(isset($error)){ echo $_POST['address']; } ?>" tabindex="1"></textarea>
-				</div>
-				<div class="form-group">
 					<input type="text" name="email" id="email" class="form-control input-lg" placeholder="Costumer Email" value="<?php if(isset($error)){ echo $_POST['email']; } ?>" tabindex="1">
 				</div>
 				<div class="form-group">
 					<input type="text" name="contact" id="contact" class="form-control input-lg" placeholder="Costumer Contact no" value="<?php if(isset($error)){ echo $_POST['email']; } ?>" tabindex="1">
+				</div>
+				<div class="form-group">
+					<input type="text" name="city" id="city" class="form-control input-lg" placeholder="Costumer City" value="<?php if(isset($error)){ echo $_POST['city']; } ?>" tabindex="1">
+				</div>
+				<div class="form-group">
+					<input type="text" name="state" id="state" class="form-control input-lg" placeholder="Costumer state" value="<?php if(isset($error)){ echo $_POST['state']; } ?>" tabindex="1">
+				</div>
+				<div class="form-group">
+					<input type="text" name="country" id="country" class="form-control input-lg" placeholder="Costumer country" value="<?php if(isset($error)){ echo $_POST['country']; } ?>" tabindex="1">
 				</div>
 				<div class="row">
 					<div class="col-xs-6 col-md-6"><input type="submit" name="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>

@@ -1,11 +1,125 @@
-<!DOCTYPE html>
+<?php
+// including the database connection file
+require('includes/config.php');
 
+if(isset($_POST['update']))
+{
+	$id = $_POST['id'];
+
+	$name=$_POST['name'];
+	$role=$_POST['role'];
+	$email=$_POST['email'];
+	$contact=$_POST['contact'];
+	$salary = $_POST['salary'];
+	$city = $_POST['city'];
+	$state = $_POST['state'];
+	$country = $_POST['country'];
+
+	// checking empty fields
+	if(empty($name) || empty($role) || empty($email) || empty($contact) || empty($salary) || empty($city) || empty($state) || empty($country))
+	{
+
+		if(empty($name))
+		{
+			echo "<font color='red'>Name field is empty.</font><br/>";
+		}
+		if(empty($role))
+		{
+			echo "<font color='red'>Role field is empty.</font><br/>";
+		}
+
+		if(empty($email))
+		{
+			echo "<font color='red'>Email field is empty.</font><br/>";
+		}
+
+		if(empty($contact))
+		{
+			echo "<font color='red'>Contact field is empty.</font><br/>";
+		}
+
+		if(empty($salary))
+		{
+			echo "<font color='red'>Salary field is empty.</font><br/>";
+		}
+
+		if(empty($city))
+		{
+			echo "<font color='red'>City field is empty.</font><br/>";
+		}
+
+		if(empty($state))
+		{
+			echo "<font color='red'>State field is empty.</font><br/>";
+		}
+
+		if(empty($country))
+		{
+			echo "<font color='red'>Country field is empty.</font><br/>";
+		}
+
+	} else
+
+	{
+		//updating the table
+		$sql = "UPDATE employees SET emp_name=:emp_name, emp_role=:emp_role, emp_email=:emp_email, emp_contact=:emp_contact, emp_salary=:emp_salary, emp_city=:emp_city, emp_state=:emp_state, emp_country=:emp_country WHERE emp_id=:emp_id";
+		$query = $db->prepare($sql);
+
+		$query->bindparam(':emp_id', $id);
+		$query->bindparam(':emp_name', $name);
+		$query->bindparam(':emp_role', $role);
+		$query->bindparam(':emp_email', $email);
+		$query->bindparam(':emp_contact', $contact);
+		$query->bindparam(':emp_salary', $salary);
+		$query->bindparam(':emp_city', $city);
+		$query->bindparam(':emp_state', $state);
+		$query->bindparam(':emp_country', $country);
+		$query->execute();
+
+		// Alternative to above bindparam and execute
+		// $query->execute(array(':id' => $id, ':name' => $name, ':email' => $email, ':age' => $age));
+
+		//redirectig to the display page. In our case, it is index.php
+		header("Location: view_employee.php");
+	}
+}
+require('layout/header.php');
+?>
+
+<?php
+//getting id from url
+$id = $_GET['emp_id'];
+
+//selecting data associated with this particular id
+$sql = "SELECT * FROM employees WHERE emp_id=:emp_id";
+$query = $db->prepare($sql);
+$query->execute(array(':emp_id' => $id));
+
+while($row = $query->fetch(PDO::FETCH_ASSOC))
+{
+	$name = $row['emp_name'];
+	$role = $row['emp_role'];
+	$email = $row['emp_email'];
+	$contact = $row['emp_contact'];
+	$salary = $row['emp_salary'];
+	$city = $row['emp_city'];
+	$state = $row['emp_state'];
+	$country = $row['emp_country'];
+}
+
+require('layout/header.php');
+?>
+
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
-<title>Baseu Grocery Store | Products and Goods</title>
+<title>Baseu Grocery Store</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
@@ -18,6 +132,7 @@
       <ul class="nospace inline pushright">
         <li><i class="fa fa-phone"></i>+60 84-367 300</li>
         <li><i class="fa fa-envelope-o"></i>baseugrocer@gg.com</li>
+
       </ul>
     </div>
     <div class="fl_right">
@@ -41,14 +156,14 @@
   <header id="header" class="hoc clear">
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="../index.html">Baseu Grocery Store</a></h1>
+      <h1><a href="index.html">Baseu Grocery Store</a></h1>
     </div>
     <div id="quickinfo" class="fl_right">
       <ul class="nospace inline">
-        <li><strong>Phone :</strong><br>
-           +60 84-367 300</li>
-        <li><strong>Tax :</strong><br>
-           +60 84-367 301</li>
+        <li><strong>Phone :</strong><br> +60 84-367 300</li>
+        <li><strong>Tax :</strong><br> +60 84-367 301</li>
+        <li><a class="btn" href="login.php">Admin Login</a></li>
+
       </ul>
     </div>
     <!-- ################################################################################################ -->
@@ -61,13 +176,8 @@
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
     <ul class="clear">
-      <li class="active"><a href="./index.html">Home</a></li>
-      <li><a class="active" href="register.html">member registration</a>
-      </li>
-
-      <li><a class="active" href="feedback.html">Feedback & suggestion</a>
-      </li>
-
+      <li class="active"><a href="memberpage.php">Admin Page</a></li>
+			<li class="active"><a href="view_employee.php">View Employee</a></li>
     </ul>
     <!-- ################################################################################################ -->
   </nav>
@@ -75,11 +185,9 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
-  <div id="breadcrumb" class="hoc clear">
-    <!-- ################################################################################################ -->
-
-  </div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
 </div>
 <!-- ################################################################################################ -->
 <div class="wrapper row3">
@@ -88,63 +196,51 @@
     <!-- ################################################################################################ -->
     <div class="content">
       <!-- ################################################################################################ -->
-      <div id="gallery">
-        <figure>
-          <header class="heading"><b>Dairy Products</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/dairy/d1.jpg" alt="">
-			Milk</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dairy/d2.jpg" alt="">
-            Cheese</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dairy/d3.jpg" alt="">
-            Butter</a></li>
-          </ul>
-
-          <header class="heading"><b>Bread/Bakery</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/bread/b1.jpg" alt="">
-            White Bread</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/bread/b2.jpg" alt="">
-            Pancake</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/bread/b3.jpg" alt="">
-            Tortilla</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/bread/b4.jpg" alt="">
-            Loaves</a></li>
-          </ul>
-
-          <header class="heading"><b>Dry/Baking Goods</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/dry/c1.png" alt="">
-            Cereals</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dry/c2.jpg" alt="">
-            Flour</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dry/c4.jpg" alt="">
-            Pasta</a></li>
-          </ul>
-
-          <header class="heading"><b>Paper Goods</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/paper/p1.jpg" alt="">
-            Paper Towels</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/paper/p2.jpg" alt="">
-            Toilet Paper</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/paper/p3.jpeg" alt="">
-            Aluminum Foil</a></li>
-          </ul>
-
-          <header class="heading"><b>Personal Care</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/personal/s1.jpg" alt="">
-            Shampoo</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/personal/s2.jpeg" alt="">
-            Soap</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/personal/s3.jpg" alt="">
-            Shaving Cream</a></li>
-          </ul>
 
 
-        </figure>
-      </div>
+
+			<form name="form1" method="post" action="edit_employee.php">
+				<table border="0">
+					<tr>
+						<td>Name</td>
+						<td><input type="text" name="name" value="<?php echo $name;?>"></td>
+					</tr>
+					<tr>
+						<td>Type</td>
+						<td><input type="text" name="role" value="<?php echo $role;?>"></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td><input type="text" name="email" value="<?php echo $email;?>"></td>
+					</tr>
+					<tr>
+						<td>Contact</td>
+						<td><input type="text" name="contact" value="<?php echo $contact;?>"></td>
+					</tr>
+					<tr>
+						<td>Salary</td>
+						<td><input type="text" name="salary" value="<?php echo $salary;?>"></td>
+					</tr>
+					<tr>
+						<td>City</td>
+						<td><input type="text" name="city" value="<?php echo $city;?>"></td>
+					</tr>
+					<tr>
+						<td>State</td>
+						<td><input type="text" name="state" value="<?php echo $state;?>"></td>
+					</tr>
+					<tr>
+						<td>Country</td>
+						<td><input type="text" name="country" value="<?php echo $country;?>"></td>
+					</tr>
+					<tr>
+						<td><input type="hidden" name="id" value=<?php echo $_GET['emp_id'];?>></td>
+						<td><input type="submit" name="update" value="Update"></td>
+					</tr>
+				</table>
+			</form>
+
+
       <!-- ################################################################################################ -->
     </div>
     <!-- ################################################################################################ -->
@@ -155,6 +251,9 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
+
+<!-- ################################################################################################ -->
+
 <div class="wrapper row4">
   <footer id="footer" class="hoc clear">
     <!-- ################################################################################################ -->
@@ -194,6 +293,7 @@
   <div id="copyright" class="hoc clear">
     <!-- ################################################################################################ -->
     <p class="fl_left">Copyright &copy; 2015 - All Rights Reserved - <a href="#">Baseu Grocery Store</a></p>
+
     <!-- ################################################################################################ -->
   </div>
 </div>
@@ -202,11 +302,11 @@
 <!-- ################################################################################################ -->
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 <!-- JAVASCRIPTS -->
-<script src="../layout/scripts/jquery.min.js"></script>
-<script src="../layout/scripts/jquery.backtotop.js"></script>
-<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+<script src="layout/scripts/jquery.min.js"></script>
+<script src="layout/scripts/jquery.backtotop.js"></script>
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
 <!-- IE9 Placeholder Support -->
-<script src="../layout/scripts/jquery.placeholder.min.js"></script>
+<script src="layout/scripts/jquery.placeholder.min.js"></script>
 <!-- / IE9 Placeholder Support -->
 </body>
 </html>

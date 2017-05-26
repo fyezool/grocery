@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+<?php
+//including the database connection file
+require('includes/config.php');
 
+//fetching data in descending order (lastest entry first)
+$result = $db->query("SELECT * FROM employees ORDER BY emp_id DESC");
+?>
+
+
+<!DOCTYPE html>
 <html>
 <head>
-<title>Baseu Grocery Store | Products and Goods</title>
+<title>Baseu Grocery Store</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
-<body id="top">
+<body background="images/bg.jpg" id="top">
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -18,6 +26,7 @@
       <ul class="nospace inline pushright">
         <li><i class="fa fa-phone"></i>+60 84-367 300</li>
         <li><i class="fa fa-envelope-o"></i>baseugrocer@gg.com</li>
+
       </ul>
     </div>
     <div class="fl_right">
@@ -41,14 +50,14 @@
   <header id="header" class="hoc clear">
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="../index.html">Baseu Grocery Store</a></h1>
+      <h1><a href="index.html">Baseu Grocery Store</a></h1>
     </div>
     <div id="quickinfo" class="fl_right">
       <ul class="nospace inline">
-        <li><strong>Phone :</strong><br>
-           +60 84-367 300</li>
-        <li><strong>Tax :</strong><br>
-           +60 84-367 301</li>
+        <li><strong>Phone :</strong><br> +60 84-367 300</li>
+        <li><strong>Tax :</strong><br> +60 84-367 301</li>
+        <li><a class="btn" href="login.php">Admin Login</a></li>
+
       </ul>
     </div>
     <!-- ################################################################################################ -->
@@ -61,12 +70,9 @@
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
     <ul class="clear">
-      <li class="active"><a href="./index.html">Home</a></li>
-      <li><a class="active" href="register.html">member registration</a>
-      </li>
+      <li class="active"><a href="memberpage.php">Admin Page</a></li>
+      <li class="active"><a href="register_employee.php">Register Employee</a></li>
 
-      <li><a class="active" href="feedback.html">Feedback & suggestion</a>
-      </li>
 
     </ul>
     <!-- ################################################################################################ -->
@@ -75,75 +81,52 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
-  <div id="breadcrumb" class="hoc clear">
-    <!-- ################################################################################################ -->
-
-  </div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
 </div>
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
+<div class="wrapper row3" style="background-color : light-grey;" >
   <main class="hoc container clear">
     <!-- main body -->
     <!-- ################################################################################################ -->
     <div class="content">
       <!-- ################################################################################################ -->
       <div id="gallery">
-        <figure>
-          <header class="heading"><b>Dairy Products</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/dairy/d1.jpg" alt="">
-			Milk</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dairy/d2.jpg" alt="">
-            Cheese</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dairy/d3.jpg" alt="">
-            Butter</a></li>
-          </ul>
-
-          <header class="heading"><b>Bread/Bakery</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/bread/b1.jpg" alt="">
-            White Bread</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/bread/b2.jpg" alt="">
-            Pancake</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/bread/b3.jpg" alt="">
-            Tortilla</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/bread/b4.jpg" alt="">
-            Loaves</a></li>
-          </ul>
-
-          <header class="heading"><b>Dry/Baking Goods</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/dry/c1.png" alt="">
-            Cereals</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dry/c2.jpg" alt="">
-            Flour</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/dry/c4.jpg" alt="">
-            Pasta</a></li>
-          </ul>
-
-          <header class="heading"><b>Paper Goods</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/paper/p1.jpg" alt="">
-            Paper Towels</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/paper/p2.jpg" alt="">
-            Toilet Paper</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/paper/p3.jpeg" alt="">
-            Aluminum Foil</a></li>
-          </ul>
-
-          <header class="heading"><b>Personal Care</b></header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/prodImg/personal/s1.jpg" alt="">
-            Shampoo</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/personal/s2.jpeg" alt="">
-            Soap</a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/prodImg/personal/s3.jpg" alt="">
-            Shaving Cream</a></li>
-          </ul>
 
 
-        </figure>
+        <table width='80%' border=0>
+
+      	<tr style="background-color : #BEDCD9;">
+      		<td>Name</td>
+      		<td>Role</td>
+      		<td>Email</td>
+      		<td>Contact</td>
+      		<td>Salary</td>
+      		<td>City</td>
+      		<td>State</td>
+      		<td>Country</td>
+          <td>Operation</td>
+
+      	</tr>
+      	<?php
+      	while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      		echo "<tr>";
+      		echo "<td>".$row['emp_name']."</td>";
+      		echo "<td>".$row['emp_role']."</td>";
+      		echo "<td>".$row['emp_email']."</td>";
+      		echo "<td>".$row['emp_contact']."</td>";
+      		echo "<td>".$row['emp_salary']."</td>";
+      		echo "<td>".$row['emp_city']."</td>";
+      		echo "<td>".$row['emp_state']."</td>";
+      		echo "<td>".$row['emp_country']."</td>";
+      echo "<td><a href=\"edit_employee.php?emp_id=$row[emp_id]\">Edit</a> | <a href=\"delete_employee.php?emp_id=$row[emp_id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";
+      	}
+      	?>
+      	</table>
+
+
+
       </div>
       <!-- ################################################################################################ -->
     </div>
@@ -155,6 +138,11 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
+<div class="wrapper row3">
+
+</div>
+<!-- ################################################################################################ -->
+
 <div class="wrapper row4">
   <footer id="footer" class="hoc clear">
     <!-- ################################################################################################ -->
@@ -194,6 +182,7 @@
   <div id="copyright" class="hoc clear">
     <!-- ################################################################################################ -->
     <p class="fl_left">Copyright &copy; 2015 - All Rights Reserved - <a href="#">Baseu Grocery Store</a></p>
+
     <!-- ################################################################################################ -->
   </div>
 </div>
@@ -202,11 +191,11 @@
 <!-- ################################################################################################ -->
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 <!-- JAVASCRIPTS -->
-<script src="../layout/scripts/jquery.min.js"></script>
-<script src="../layout/scripts/jquery.backtotop.js"></script>
-<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+<script src="layout/scripts/jquery.min.js"></script>
+<script src="layout/scripts/jquery.backtotop.js"></script>
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
 <!-- IE9 Placeholder Support -->
-<script src="../layout/scripts/jquery.placeholder.min.js"></script>
+<script src="layout/scripts/jquery.placeholder.min.js"></script>
 <!-- / IE9 Placeholder Support -->
 </body>
 </html>

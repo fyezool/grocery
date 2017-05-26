@@ -14,6 +14,7 @@ define('DBUSER','root');
 define('DBPASS','');
 define('DBNAME','grocery1');
 
+
 try {
 
 	//create PDO connection
@@ -27,9 +28,4 @@ try {
     echo '<p class="bg-danger">'.$e->getMessage().'</p>';
     exit;
 }
-
-//include the user class, pass in the database connection
-include('classes/user.php');
-
-$user = new User($db);
 ?>
