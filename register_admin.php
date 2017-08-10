@@ -67,7 +67,7 @@ if(isset($_POST['submit'])){
 }
 
 //define page title
-$title = 'Demo';
+$title = 'Regsiter';
 
 //include header template
 require('layout/header.php');
@@ -96,7 +96,7 @@ require('layout/header.php');
 				if(isset($_GET['action']) && $_GET['action'] == 'joined'){
 					echo "<h2 class='bg-success'>Registration successful, please check your email to activate your account.</h2>";
 				}
-				
+
 				?>
 
 				<div class="form-group">
