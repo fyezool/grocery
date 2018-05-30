@@ -100,7 +100,7 @@ require('layout/header.php');
   <header id="header" class="hoc clear">
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="index.html">Baseu Grocery Store</a></h1>
+      <h1><a href="index.php">Baseu Grocery Store</a></h1>
     </div>
     <div id="quickinfo" class="fl_right">
       <ul class="nospace inline">
@@ -120,7 +120,7 @@ require('layout/header.php');
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
     <ul class="clear">
-      <li class="active"><a href="index.html">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       <li><a class="active" href="feedback.php">Feedback & suggestion</a></li>
 
     </ul>

@@ -95,7 +95,7 @@ require('layout/header.php');
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
     <ul class="clear">
-      <li class="active"><a href="index.html">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       <li class="active"><a href="feedback.php">Feedback & suggestion</a></li>
 
     </ul>

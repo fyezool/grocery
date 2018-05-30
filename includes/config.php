@@ -7,11 +7,11 @@ session_start();
 //database credentials for connections
 
 //db host and related port
-define('DBHOST','127.0.0.1');
+define('DBHOST','mysql');
 
 //db username
 define('DBUSER','root');
-define('DBPASS','');
+define('DBPASS','root');
 define('DBNAME','grocery1');
 
 try {

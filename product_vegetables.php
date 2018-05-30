@@ -50,7 +50,7 @@ $result = $db->query("SELECT pro_name, pro_price, pro_mem_price, pro_description
   <header id="header" class="hoc clear">
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="index.html">Baseu Grocery Store</a></h1>
+      <h1><a href="index.php">Baseu Grocery Store</a></h1>
     </div>
     <div id="quickinfo" class="fl_right">
       <ul class="nospace inline">
@@ -70,7 +70,7 @@ $result = $db->query("SELECT pro_name, pro_price, pro_mem_price, pro_description
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
     <ul class="clear">
-      <li class="active"><a href="index.html">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
     </ul>
     <!-- ################################################################################################ -->
   </nav>

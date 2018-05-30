@@ -49,7 +49,7 @@ $result = $db->query("SELECT * FROM products ORDER BY pro_type ASC");
   <header id="header" class="hoc clear">
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="index.html">Baseu Grocery Store</a></h1>
+      <h1><a href="index.php">Baseu Grocery Store</a></h1>
     </div>
     <div id="quickinfo" class="fl_right">
       <ul class="nospace inline">
